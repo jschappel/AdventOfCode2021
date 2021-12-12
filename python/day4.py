@@ -12,9 +12,6 @@ class Board:
             elif self.checkDown(i):
                 print("Won Down")
                 return True
-            # elif self.checkDiagonals():
-            #     print("Won Diag")
-            #     return True
         return False
     
     def checkAcross(self, i):
@@ -38,23 +35,6 @@ class Board:
                         sum += int(self.layout[i][j])
             return sum
         return sumUnmarked() * int(lastCalled)
-    
-    # def checkDiagonals(self):
-    #     def checkLeft():
-    #         for i in range(0, len(self.layout)):
-    #             if not self.layout[i][i] in self.called:
-    #                 return False
-    #         print("won left")
-    #         return True
-    #     def checkRight():
-    #         x = 0
-    #         for i in range(len(self.layout) -1, -1, -1):
-    #             if not self.layout[i][x] in self.called:
-    #                 return False
-    #             x+=1
-    #         print("won right")
-    #         return True
-    #     return checkLeft() or checkRight()
 
 def makeBoards():
     with open("./python/files/board.txt") as f:
