@@ -12,9 +12,9 @@ class Board:
             elif self.checkDown(i):
                 print("Won Down")
                 return True
-            elif self.checkDiagonals():
-                print("Won Diag")
-                return True
+            # elif self.checkDiagonals():
+            #     print("Won Diag")
+            #     return True
         return False
     
     def checkAcross(self, i):
@@ -28,21 +28,33 @@ class Board:
             if not self.layout[j][i] in self.called:
                 return False
         return True
-    
-    def checkDiagonals(self):
-        def checkLeft():
+
+    def calcScore(self, lastCalled):
+        def sumUnmarked():
+            sum = 0
             for i in range(0, len(self.layout)):
-                if not self.layout[i][i] in self.called:
-                    return False
-            return True
-        def checkRight():
-            x = 0
-            for i in range(len(self.layout) -1, -1, -1):
-                if not self.layout[i][x] in self.called:
-                    return False
-                x+=1
-            return True
-        return checkLeft() or checkRight()
+                for j in range(len(self.layout[i])):
+                    if not self.layout[i][j] in self.called:
+                        sum += int(self.layout[i][j])
+            return sum
+        return sumUnmarked() * int(lastCalled)
+    
+    # def checkDiagonals(self):
+    #     def checkLeft():
+    #         for i in range(0, len(self.layout)):
+    #             if not self.layout[i][i] in self.called:
+    #                 return False
+    #         print("won left")
+    #         return True
+    #     def checkRight():
+    #         x = 0
+    #         for i in range(len(self.layout) -1, -1, -1):
+    #             if not self.layout[i][x] in self.called:
+    #                 return False
+    #             x+=1
+    #         print("won right")
+    #         return True
+    #     return checkLeft() or checkRight()
 
 def makeBoards():
     with open("./python/files/board.txt") as f:
@@ -67,9 +79,11 @@ def makeBoards():
         return (calls, boards)
 
 [draws, boards] = makeBoards()
+print(draws)
+
 for draw in draws:
     for board in boards:
         board.called.append(draw)
         if board.hasWon():
-            print("Board " + str(board.name) + " has Won after " + draw)
+            print("Total is: " + str(board.calcScore(draw)))
             exit(0)
