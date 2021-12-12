@@ -32,12 +32,11 @@ class Board:
                     if not self.layout[i][j] in self.called:
                         sum += int(self.layout[i][j])
             return sum
-        print("S: " + str(sumUnmarked()))
         return sumUnmarked() * int(lastCalled)
 
 def makeBoards():
     with open("./python/files/board.txt") as f:
-        calls = [] #Todo: Clean this up
+        calls = []
         boards = []
         curBoard = []
         name = 1
@@ -65,7 +64,6 @@ def pt1():
             if board.hasWon():
                return board.calcScore(draw)
 
-
 def pt2():
     [draws, boards] = makeBoards()
     lastWonTotal = 0
@@ -73,14 +71,12 @@ def pt2():
         if len(boards) == 0:
             print(draw)
             return lastWonTotal
-        for board in boards:
+        for i, board in enumerate(boards):
             board.called.append(draw)
             if board.hasWon():
                 lastWonTotal = board.calcScore(draw)
-                print("Board " + str(board.name) + " has won after " + draw)
-                print(board.called)
-                boards.remove(board)
-                
+                boards[i] = None
+        boards = list(filter(lambda b: b != None, boards))
     return lastWonTotal
 
 print("The ans for pt1 is: " + str(pt1()))
