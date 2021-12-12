@@ -7,10 +7,8 @@ class Board:
     def hasWon(self):
         for i in range(0, len(self.layout)):
             if self.checkAcross(i):
-                print("Won Across")
                 return True
             elif self.checkDown(i):
-                print("Won Down")
                 return True
         return False
     
@@ -34,6 +32,7 @@ class Board:
                     if not self.layout[i][j] in self.called:
                         sum += int(self.layout[i][j])
             return sum
+        print("S: " + str(sumUnmarked()))
         return sumUnmarked() * int(lastCalled)
 
 def makeBoards():
@@ -41,7 +40,7 @@ def makeBoards():
         calls = [] #Todo: Clean this up
         boards = []
         curBoard = []
-        name = 0
+        name = 1
         for (i, line) in enumerate(f.readlines()):
             if i == 0:
                 calls = line.split(',')
@@ -58,12 +57,31 @@ def makeBoards():
         boards.append(Board(curBoard, [], name))
         return (calls, boards)
 
-[draws, boards] = makeBoards()
-print(draws)
+def pt1():
+    [draws, boards] = makeBoards()
+    for draw in draws:
+        for board in boards:
+            board.called.append(draw)
+            if board.hasWon():
+               return board.calcScore(draw)
 
-for draw in draws:
-    for board in boards:
-        board.called.append(draw)
-        if board.hasWon():
-            print("Total is: " + str(board.calcScore(draw)))
-            exit(0)
+
+def pt2():
+    [draws, boards] = makeBoards()
+    lastWonTotal = 0
+    for draw in draws:
+        if len(boards) == 0:
+            print(draw)
+            return lastWonTotal
+        for board in boards:
+            board.called.append(draw)
+            if board.hasWon():
+                lastWonTotal = board.calcScore(draw)
+                print("Board " + str(board.name) + " has won after " + draw)
+                print(board.called)
+                boards.remove(board)
+                
+    return lastWonTotal
+
+print("The ans for pt1 is: " + str(pt1()))
+print("The ans for pt2 is: " + str(pt2()))
