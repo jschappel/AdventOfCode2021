@@ -14,10 +14,6 @@ addToGraph :: Graph -> Point -> Graph
 addToGraph m p = case M.lookup p m of
   Nothing -> M.insert p 1 m
   Just n  -> M.insert p (n+1) m
---instance Show Graph where
---  show (Graph g) = mkrow
---    where
---      mkrow = [if x == y then '\n' else '.' | y <- [1..11], x <- [1..10]]
 
 
 parseInput :: String -> [Point]
@@ -31,11 +27,13 @@ parseInput = map toPoint . splitOn "->"
 addMissingPts :: Point -> Point -> [Point]
 addMissingPts (x1,y1) (x2,y2)
   | x1 == x2 && y1 == y2 = [(x1, x2)]
-  | x1 == x2 && y1 <= y2 = [(x1, y) | y <- [y1..y2]]
-  | y1 == y2 && x1 <= x2 = [(x, y1) | x <- [x1..x2]]
-  | x1 == x2             = [(x1, y) | y <- [y1, y1-1..y2]]
-  | y1 == y2             = [(x, y1) | x <- [x1, x1-1..x2]]
-  | otherwise = [] --TODO: Finish
+  | x1 == x2 = [(x1, y) | y <- range y1 y2]
+  | y1 == y2 = [(x, y1) | x <- range x1 x2]
+  | otherwise = zip (range x1 x2) (range y1 y2)
+  where
+    range a b 
+      | a < b     = [a..b]
+      | otherwise = [a,a-1..b]
 
 
 numOfDangerousAreas = do
