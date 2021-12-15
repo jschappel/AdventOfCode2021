@@ -21,6 +21,7 @@ executable AdventOfCode
                        , Day2
                        , Day3
                        , Day5
+                       , Day6
   -- other-extensions:
   build-depends:       base >=4.12 && <4.15
                       , split
