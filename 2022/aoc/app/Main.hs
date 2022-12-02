@@ -1,6 +1,8 @@
 module Main (main) where
 
-import Lib
+import Day1
 
 main :: IO ()
-main = someFunc
+main = do
+  res <- getMaxThreeCalories "data/Day1.txt"
+  print $ "res is " ++ (show res)

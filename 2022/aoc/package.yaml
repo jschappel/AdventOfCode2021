@@ -55,5 +55,6 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    defaults:  hspec/hspec@main
     dependencies:
     - aoc
