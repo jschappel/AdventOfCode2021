@@ -1,8 +1,8 @@
 module Main (main) where
 
-import Day1
+import Day2
 
 main :: IO ()
 main = do
-  res <- getMaxThreeCalories "data/Day1.txt"
+  res <- computeMyTotalScore "data/Day2.txt"
   print $ "res is " ++ (show res)
