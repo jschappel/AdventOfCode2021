@@ -44,4 +44,12 @@ main = hspec $ do
       actual_2 <- computeRucksackPriorities "data/Day3.txt"
       actual_2 `shouldBe` 8185
 
+    it "Calculates the sum of the groups priorities" $ do
+      actual <- computeRucksackGroupPriorities "test/data/Day3.txt"
+      actual `shouldBe` 70
+
+    it "Calculates the sum of the groups priorities" $ do
+      actual <- computeRucksackGroupPriorities "data/Day3.txt"
+      actual `shouldBe` 2817
+
       
