@@ -2,6 +2,7 @@
 import Test.Hspec
 import Day1
 import Day2
+import Day3
 
 main :: IO ()
 main = hspec $ do
@@ -34,5 +35,13 @@ main = hspec $ do
 
       actual_2 <- computeFixedScore "data/Day2.txt"
       actual_2 `shouldBe` 10835
-    
+
+  describe "Day 3 Tests" $ do
+    it "Calculates the sum of the priorities" $ do
+      actual <- computeRucksackPriorities "test/data/Day3.txt"
+      actual `shouldBe` 157
+
+      actual_2 <- computeRucksackPriorities "data/Day3.txt"
+      actual_2 `shouldBe` 8185
+
       
