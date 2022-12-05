@@ -53,9 +53,16 @@ main = hspec $ do
       actual_2 `shouldBe` 2817
 
   describe "Day 4 Tests" $ do
-    it "Calculates Number of overlapping groups" $ do
-      actual <- computeOverlappingGroups "test/data/Day4.txt"
+    it "Calculates Number of fully contained groups" $ do
+      actual <- computeFullyContainedGroups "test/data/Day4.txt"
       actual `shouldBe` 2
 
-      actual_2 <- computeOverlappingGroups "data/Day4.txt"
+      actual_2 <- computeFullyContainedGroups "data/Day4.txt"
       actual_2 `shouldBe` 547
+
+    it "Calculates Number of overlapping groups" $ do
+      actual <- computeOverlappingGroups "test/data/Day4.txt"
+      actual `shouldBe` 4
+
+      actual_2 <- computeOverlappingGroups "data/Day4.txt"
+      actual_2 `shouldBe` 843
