@@ -3,6 +3,7 @@ import Test.Hspec
 import Day1
 import Day2
 import Day3
+import Day4
 
 main :: IO ()
 main = hspec $ do
@@ -48,8 +49,13 @@ main = hspec $ do
       actual <- computeRucksackGroupPriorities "test/data/Day3.txt"
       actual `shouldBe` 70
 
-    it "Calculates the sum of the groups priorities" $ do
-      actual <- computeRucksackGroupPriorities "data/Day3.txt"
-      actual `shouldBe` 2817
+      actual_2 <- computeRucksackGroupPriorities "data/Day3.txt"
+      actual_2 `shouldBe` 2817
 
-      
+  describe "Day 4 Tests" $ do
+    it "Calculates Number of overlapping groups" $ do
+      actual <- computeOverlappingGroups "test/data/Day4.txt"
+      actual `shouldBe` 2
+
+      actual_2 <- computeOverlappingGroups "data/Day4.txt"
+      actual_2 `shouldBe` 547
