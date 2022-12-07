@@ -39,7 +39,7 @@ fn parse_moves(line: &str) -> Instruction {
 }
 
 fn move_for_instruction_pt1(instr: &Instruction, stack: &mut Stack) {
-    for i in 0..instr.mv {
+    for i_ in 0..instr.mv {
         match stack[instr.from - 1].pop_front() {
             Some(tmp) => stack[instr.to - 1].push_front(tmp),
             None => panic!("Invalid move"),
